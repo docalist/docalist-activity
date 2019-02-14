@@ -1,7 +1,7 @@
 {
 	"type": "wordpress-plugin",
 	"name": "docalist/docalist-activity",
-	"description": "Entités "work" et "event" pour docalist.",
+	"description": "Entités \"work\" et \"event\" pour docalist.",
   "homepage": "https://docalist.org/",
 	"license": "GPL-2.0-or-later",
 
