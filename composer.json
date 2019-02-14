@@ -1,0 +1,44 @@
+{
+	"type": "wordpress-plugin",
+	"name": "docalist/docalist-activity",
+	"description": "Entités "work" et "event" pour docalist.",
+  "homepage": "https://docalist.org/",
+	"license": "GPL-2.0-or-later",
+
+	"authors": [ 
+        {
+            "name": "Daniel Ménard",
+            "email": "daniel.menard@laposte.net",
+            "homepage": "https://docalist.org/"
+        }
+    ],
+
+	"keywords": [
+		"docalist"
+	],
+    
+    "support": {
+        "issues": "https://github.com/docalist/docalist/issues",
+        "forum": "https://groups.google.com/forum/#!forum/docalist-discuss"
+    },
+    
+	"require": {
+		"composer/installers": "~1.0",
+		"php": ">=7.2"
+	},
+    "autoload" : {
+        "psr-4" : {
+            "Docalist\\Activity\\" : "class"
+        }
+    },
+    "config" : {
+        "sort-packages" : true,
+        "optimize-autoloader" : true,
+        "classmap-authoritative" : true
+    },
+    "extra" : {
+        "branch-alias" : {
+            "dev-master" : "0.1-dev"
+        }
+    }
+}
