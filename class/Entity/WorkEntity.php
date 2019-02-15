@@ -24,7 +24,7 @@ use Docalist\Data\GridBuilder\EditGridBuilder;
 use Docalist\Search\MappingBuilder;
 
 /**
- * Une œuvre, une mission, un projet, une activité, un travail, une production...
+ * Une activité, une mission, un projet, un travail, une production, une œuvre artistique...
  *
  * @property NameField[]            $name           Noms.
  * @property ContentField[]         $content        Présentation.
@@ -46,9 +46,9 @@ class WorkEntity extends ContentEntity
     {
         return [
             'name' => 'work',
-            'label' => __('Œuvre', 'docalist-activity'),
+            'label' => __('Activité', 'docalist-activity'),
             'description' => __(
-                'Une œuvre, une mission, un projet, une activité, un travail, une production...',
+                'Une activité, une mission, un projet, un travail, une production, une œuvre artistique...',
                 'docalist-activity'
             ),
             'fields' => [
