@@ -15,11 +15,12 @@ use Docalist\Data\Entity\ContentEntity;
 use Docalist\Activity\Field\Work\NameField;
 use Docalist\Activity\Field\Work\ContentField;
 use Docalist\Activity\Field\Work\TopicField;
+use Docalist\Activity\Field\Work\LinkField;
 use Docalist\Activity\Field\Work\OrganizationField;
 use Docalist\Activity\Field\Work\PersonField;
 use Docalist\Activity\Field\Work\NumberField;
+use Docalist\Activity\Field\Work\DateField;
 use Docalist\Activity\Field\Work\FigureField;
-use Docalist\Activity\Field\Work\LinkField;
 use Docalist\Data\GridBuilder\EditGridBuilder;
 use Docalist\Search\MappingBuilder;
 
@@ -33,6 +34,7 @@ use Docalist\Search\MappingBuilder;
  * @property OrganizationField[]    $organization   Organismes liés.
  * @property PersonField[]          $person         Personnes liées.
  * @property NumberField[]          $number         Numéros officiels.
+ * @property DateField[]            $date           Dates.
  * @property FigureField[]          $figure         Chiffres clés.
  *
  * @author Daniel Ménard <daniel.menard@laposte.net>
@@ -59,8 +61,8 @@ class WorkEntity extends ContentEntity
                 'organization'  => OrganizationField::class,
                 'person'        => PersonField::class,
                 'number'        => NumberField::class,
+                'date'          => DateField::class,
                 'figure'        => FigureField::class,
-             // 'date'          => DateField::class, pas de champ date ?
             ],
         ];
     }
@@ -88,7 +90,7 @@ class WorkEntity extends ContentEntity
         $this->posttitle =
             isset($this->name) && !empty($firstName = $this->name->first()) /** @var NameField $firstName */
             ? $firstName->getFormattedValue(['format' => 'v'])
-            : __('(work sans nom)', 'docalist-activity');
+            : __('(activité sans nom)', 'docalist-activity');
     }
 
     /**
@@ -101,10 +103,10 @@ class WorkEntity extends ContentEntity
         $builder->setProperty('stylesheet', 'docalist-activity-edit-work');
 
         $builder->addGroups([
-            __('Présentation', 'docalist-activity')             => 'name,content,topic,link',
-            __('Relations', 'docalist-activity')                => 'organization,person',
-            __('Numéros et chiffres clés', 'docalist-activity') => 'number,figure',
-            __('Informations de gestion', 'docalist-activity')  => '-type,ref,source',
+            __('Présentation', 'docalist-activity')                     => 'name,content,topic,link',
+            __('Relations', 'docalist-activity')                        => 'organization,person',
+            __('Numéros, dates et chiffres clés', 'docalist-activity')  => 'number,date,figure',
+            __('Informations de gestion', 'docalist-activity')          => '-type,ref,source',
         ]);
 
         $builder->setDefaultValues([
@@ -115,6 +117,7 @@ class WorkEntity extends ContentEntity
             'organization'  => [ ['type' => 'affiliation'], ['type' => 'member-of'], ['type' => 'partner'] ],
             'person'        => [ ['type' => 'management'], ['type' => 'webmaster'], ['type' => 'contact'] ],
             'number'        => [  ],
+            'date'          => [ ['type' => 'start'] ],
             'figure'        => [ ['type' => 'staff'] ],
         ]);
 
@@ -162,6 +165,10 @@ class WorkEntity extends ContentEntity
         $mapping->addField('number')->literal()
                 ->addTemplate('number-*')->copyFrom('number')->copyDataTo('number');
 
+        // Date
+        $mapping->addField('date')->date()
+            ->addTemplate('date-*')->copyFrom('date')->copyDataTo('date');
+
         // Figures
         $mapping->addField('figure')->decimal()
                 ->addTemplate('figure-*')->copyFrom('figure')->copyDataTo('figure');
@@ -186,6 +193,7 @@ class WorkEntity extends ContentEntity
         $this->mapMultiField($document, 'organization');
         $this->mapMultiField($document, 'person');
         $this->mapMultiField($document, 'number');
+        $this->mapMultiField($document, 'date');
         $this->mapMultiField($document, 'figure');
 
         // Initialise le champ 'hierarchy' pour tous les topics qui sont associés à une table de type thesaurus
