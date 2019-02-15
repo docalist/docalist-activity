@@ -35,7 +35,7 @@ class NameField extends TypedText
             'name' => 'name',
             'label' => __('Nom', 'docalist-activity'),
             'description' => __(
-                "Noms, sigles et appellations utilisés pour désigner l\'activité.",
+                "Noms, sigles et appellations utilisés pour désigner l'activité.",
                 'docalist-activity'
             ),
             'repeatable' => true,
