@@ -29,6 +29,9 @@ use Docalist\Type\TypedText;
  */
 class NameField extends TypedText
 {
+    /**
+     * {@inheritDoc}
+     */
     public static function loadSchema()
     {
         return [

@@ -22,6 +22,9 @@ use Docalist\Data\Field\ContentField as BaseContentField;
  */
 class ContentField extends BaseContentField
 {
+    /**
+     * {@inheritDoc}
+     */
     public static function loadSchema()
     {
         return [

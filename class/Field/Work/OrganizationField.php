@@ -29,6 +29,9 @@ use Docalist\Data\Type\TypedRelation;
  */
 class OrganizationField extends TypedRelation
 {
+    /**
+     * {@inheritDoc}
+     */
     public static function loadSchema()
     {
         return [

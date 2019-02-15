@@ -29,6 +29,9 @@ use Docalist\Data\Field\TopicField as BaseTopicField;
  */
 class TopicField extends BaseTopicField
 {
+    /**
+     * {@inheritDoc}
+     */
     public static function loadSchema()
     {
         return [
