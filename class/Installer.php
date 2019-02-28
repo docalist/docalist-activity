@@ -57,47 +57,33 @@ class Installer
      */
     protected function getTables()
     {
-        return $this->getCommonTables() + $this->getTablesForOrganization() + $this->getTablesForPerson();
+        return $this->getTablesForEvent();
     }
 
     /**
-     * Tables communes à différents types d'entités.
+     * Tables spécifiques à l'entité Event.
      *
      * @return array
      */
-    protected function getCommonTables()
+    protected function getTablesForEvent()
     {
-        return [];
-        $dir = DOCALIST_ACTIVITY_DIR . '/tables/';
+        $dir = DOCALIST_ACTIVITY_DIR . '/tables/event/';
 
         return [
-            'name-type' => [
-                'path' => $dir . 'name-type.txt',
-                'label' => __('Nom - Exemple de table "types de noms"', 'docalist-activity'),
+            'event-event-relation' => [
+                'path' => $dir . 'event-event-relation.txt',
+                'label' => __("Événement - Relations avec d'autres événements", 'docalist-activity'),
                 'format' => 'table',
-                'type' => 'name-type',
-                'creation' => '2015-12-08 17:04:05',
+                'type' => 'relation-type',
+                'creation' => '2016-01-12 22:51:01',
+            ],
+            'event-place-relation' => [
+                'path' => $dir . 'event-place-relation.txt',
+                'label' => __('Événement - Relations avec des lieux', 'docalist-activity'),
+                'format' => 'table',
+                'type' => 'relation-type',
+                'creation' => '2016-01-12 22:52:06',
             ],
         ];
-    }
-
-    /**
-     * Tables spécifiques à l'entité Organization.
-     *
-     * @return array
-     */
-    protected function getTablesForOrganization()
-    {
-        return [];
-    }
-
-    /**
-     * Tables spécifiques à l'entité Person.
-     *
-     * @return array
-     */
-    protected function getTablesForPerson()
-    {
-        return [];
     }
 }
