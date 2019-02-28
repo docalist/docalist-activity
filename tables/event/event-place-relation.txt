@@ -1,0 +1,9 @@
+# ------------------------------------------------------------------------------
+# Evénement : précision sur le lieu
+#
+# 12/01/16, DM Version initiale
+# ------------------------------------------------------------------------------
+code;label;description
+main;Lieu principal;
+secondary;Lieu annexe;
+other;Autre;A utiliser si aucun type ne convient.
