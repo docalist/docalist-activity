@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Docalist\Activity;
 
 use Docalist\Activity\Entity\WorkEntity;
+use Docalist\Activity\Entity\EventEntity;
 
 /**
  * Plugin docalist-activity.
@@ -32,6 +33,7 @@ class Plugin
         add_filter('docalist_databases_get_types', function (array $types) {
             return $types + [
                 'work' => WorkEntity::class,
+                'event' => EventEntity::class,
             ];
         });
     }
