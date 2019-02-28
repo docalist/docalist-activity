@@ -1,0 +1,14 @@
+# ------------------------------------------------------------------------------
+# Evénement : liens entre événements
+#
+# 12/01/16, DM Version initiale
+# 06/03/16, DM Ajout de "caa" (#96)
+# ------------------------------------------------------------------------------
+code;label;description
+during;En même temps que;
+occasion;À l'occasion de;
+before;Avant;
+after;Après;
+see;Voir aussi;
+caa;Session CAA;Session de CAA au cours de laquelle une aide à été attribuée à cet événement.
+other;Autre;A utiliser si aucun type ne convient.
