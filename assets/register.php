@@ -21,4 +21,11 @@ add_action('admin_init', function () {
         [],
         '190214'
     );
+
+    wp_register_style(
+        'docalist-activity-edit-event',
+        "$base/assets/edit-event.css",
+        [],
+        '190215'
+    );
 });

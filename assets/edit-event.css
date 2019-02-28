@@ -1,0 +1,32 @@
+/**
+ * This file is part of Docalist Activity.
+ *
+ * Copyright (C) 2017-2019 Daniel Ménard
+ *
+ * For copyright and license information, please view the
+ * LICENSE file that was distributed with this source code.
+ */
+.field-place th.field-type          { width: 30%; }
+.field-event th.field-type          { width: 30%; }
+
+.field-name th.field-type           { width: 30%; }
+.field-name .field-value            { width: 70%; }
+
+.field-link th.field-type           { width: 25%; }
+.field-link .field-url              { width: 40%; }
+.field-link .field-label            { width: 25%; }
+.field-link .field-date             { width: 10%; }
+
+.field-organization th.field-type   { width: 30%; }
+
+.field-person th.field-type         { width: 30%; }
+
+.field-number th.field-type         { width: 30%; }
+
+/* .field-date th.field-type           { width: 30%; } pas de champ date dans event */ 
+
+.field-figure th.field-type         { width: 30%; }
+
+.field-source th.field-type         { width: 20%; }
+.field-source .field-url            { width: 40%; }
+.field-source .field-value          { width: 40%; }
