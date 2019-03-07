@@ -21,6 +21,7 @@ use Docalist\People\Entity\PlaceEntity;
 use Docalist\Data\GridBuilder\EditGridBuilder;
 use Docalist\Search\MappingBuilder;
 use DateTime;
+use Docalist\Data\Type\PostalAddress;
 
 /**
  * Un événement, une réunion, une rencontre, une représentation d'un spectacle...
@@ -97,10 +98,37 @@ class EventEntity extends WorkEntity
      */
     protected function initPostTitle()
     {
-        $this->posttitle =
-            isset($this->name) && !empty($firstName = $this->name->first()) /** @var NameField $firstName */
-            ? $firstName->getFormattedValue(['format' => 'v'])
-            : __('(événement sans nom)', 'docalist-activity');
+        // Récupère la fiche work parent
+        $work = $this->work->getEntity(); /** @var WorkEntity $work */
+
+        // Détermine le nom de l'événement (celui de la fiche event ou celui de la fiche work parent)
+        $name = $this->name->first();
+        empty($name) && !is_null($work) && $name = $work->name->first();
+        $name && $name = $name->value->getPhpValue();
+        empty($name) && $name = __('Événement sans nom', 'docalist-activity');
+
+        // Détermine la ou les villes où se déroule l'événement
+        $cities = [];
+        foreach ($this->place->filterEntities() as $place) { /** @var PlaceEntity $place */
+            foreach ($place->address->filterValues() as $address) { /** @var PostalAddress $address */
+                $city = $address->locality->getPhpValue();
+                !empty($city) && $cities[$city] = $city; // dédoublonne les villes
+            }
+        }
+        $cities = $cities ? implode(' / ', $cities) : __('lieu inconnu', 'docalist-activity');
+
+        // Détermine la date de début et de fin de l'événement
+        $start = $this->startend->getStartDate();
+        $end = $this->startend->getEndDate();
+
+        // Formatte les dates
+        $dates = [];
+        !is_null($start) && $dates[] = $start->format('d/m/Y');
+        !is_null($end) && ($end !== $start) && $dates[] = $end->format('d/m/Y');
+        $dates = $dates ? implode(' - ', array_unique($dates)) : __('date inconnue', 'docalist-activity');
+
+        // Construit le titre du post
+        $this->posttitle = sprintf('%s (%s, %s)', $name, $cities, $dates);
     }
 
     /**
@@ -112,12 +140,11 @@ class EventEntity extends WorkEntity
 
         $builder->setProperty('stylesheet', 'docalist-activity-edit-event');
 
-        // TODO
         $builder->addGroups([
             __('Événement', 'docalist-activity')                        => 'work,startend,place,event',
             __('Présentation', 'docalist-activity')                     => 'name,content,topic,link',
             __('Relations', 'docalist-activity')                        => 'organization,person',
-            __('Numéros, dates et chiffres clés', 'docalist-activity')  => 'number,figure',
+            __('Numéros et chiffres clés', 'docalist-activity')         => 'number,figure',
             __('Informations de gestion', 'docalist-activity')          => '-type,ref,source',
         ]);
 
@@ -159,7 +186,7 @@ class EventEntity extends WorkEntity
 
         // startdate = plus petite des dates de début de startend
         $mapping->addField('startdate')->dateTime();
-        $mapping->addField('startdate-hierarchy')->text('hierarchy')->setProperty('search_analyzer', 'keyword');
+        $mapping->addField('startdate-hierarchy')->hierarchy();
 
         // enddate = plus grande des dates de début de startend
         $mapping->addField('enddate')->dateTime();
