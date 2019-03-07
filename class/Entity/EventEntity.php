@@ -12,24 +12,31 @@ declare(strict_types=1);
 namespace Docalist\Activity\Entity;
 
 use Docalist\Activity\Entity\WorkEntity;
+
 use Docalist\Activity\Field\Event\WorkField;
 use Docalist\Activity\Field\Event\StartEndField;
 use Docalist\Activity\Field\Event\PlaceField;
 use Docalist\Activity\Field\Event\EventField;
 use Docalist\Activity\Field\Work\NameField;
-use Docalist\People\Entity\PlaceEntity;
+
+use Docalist\Type\Collection\DateTimeIntervalCollection;
+use Docalist\Data\Type\Collection\TypedRelationCollection;
+
 use Docalist\Data\GridBuilder\EditGridBuilder;
 use Docalist\Search\MappingBuilder;
-use DateTime;
+
 use Docalist\Data\Type\PostalAddress;
+use Docalist\People\Entity\PlaceEntity;
+
+use DateTime;
 
 /**
  * Un événement, une réunion, une rencontre, une représentation d'un spectacle...
  *
- * @property WorkField              $work           Work parent.
- * @property StartEndField[]        $startend       Date de début et date de fin de l'événement (répétable).
- * @property PlaceField[]           $place          Lieux liés.
- * @property EventField[]           $event          Événements liés.
+ * @property WorkField                  $work           Work parent.
+ * @property DateTimeIntervalCollection $startend       Date de début et date de fin de l'événement (répétable).
+ * @property TypedRelationCollection    $place          Lieux liés.
+ * @property TypedRelationCollection    $event          Événements liés.
  *
  * @author Daniel Ménard <daniel.menard@laposte.net>
  */

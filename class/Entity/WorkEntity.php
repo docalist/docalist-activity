@@ -12,6 +12,7 @@ declare(strict_types=1);
 namespace Docalist\Activity\Entity;
 
 use Docalist\Data\Entity\ContentEntity;
+
 use Docalist\Activity\Field\Work\NameField;
 use Docalist\Activity\Field\Work\ContentField;
 use Docalist\Activity\Field\Work\TopicField;
@@ -21,21 +22,27 @@ use Docalist\Activity\Field\Work\PersonField;
 use Docalist\Activity\Field\Work\NumberField;
 use Docalist\Activity\Field\Work\DateField;
 use Docalist\Activity\Field\Work\FigureField;
+
+use Docalist\Type\Collection\TypedValueCollection;
+use Docalist\Data\Type\Collection\TopicCollection;
+use Docalist\Type\Collection\MultiFieldCollection;
+use Docalist\Data\Type\Collection\TypedRelationCollection;
+
 use Docalist\Data\GridBuilder\EditGridBuilder;
 use Docalist\Search\MappingBuilder;
 
 /**
  * Une activité, une mission, un projet, un travail, une production, une œuvre artistique...
  *
- * @property NameField[]            $name           Noms.
- * @property ContentField[]         $content        Présentation.
- * @property TopicField[]           $topic          Mots-clés.
- * @property LinkField[]            $link           Liens
- * @property OrganizationField[]    $organization   Organismes liés.
- * @property PersonField[]          $person         Personnes liées.
- * @property NumberField[]          $number         Numéros officiels.
- * @property DateField[]            $date           Dates.
- * @property FigureField[]          $figure         Chiffres clés.
+ * @property TypedValueCollection       $name           Noms.
+ * @property TypedValueCollection       $content        Présentation.
+ * @property TopicCollection            $topic          Mots-clés.
+ * @property MultiFieldCollection       $link           Liens
+ * @property TypedRelationCollection    $organization   Organismes liés.
+ * @property TypedRelationCollection    $person         Personnes liées.
+ * @property TypedValueCollection       $number         Numéros officiels.
+ * @property TypedValueCollection       $date           Dates.
+ * @property TypedValueCollection       $figure         Chiffres clés.
  *
  * @author Daniel Ménard <daniel.menard@laposte.net>
  */
