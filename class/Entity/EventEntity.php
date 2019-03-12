@@ -264,11 +264,11 @@ class EventEntity extends WorkEntity
 
         // startdate = plus petite des dates de début de startend
         $start = $this->startend->getStartDate(); /** @var DateTime|null $start (dans DateTimeIntervalCollection) */
-        $start && $document['startdate'] = $start->format(DateTime::RFC3339);
+        $start && $document['startdate'] = $start->format('Y-m-d H:i:s');
 
         // enddate = plus grande des dates de début de startend
         $end = $this->startend->getEndDate(); /** @var DateTime|null $start (dans DateTimeIntervalCollection) */
-        $end && $document['enddate'] = $end->format(DateTime::RFC3339);
+        $end && $document['enddate'] = $end->format('Y-m-d H:i:s');
 
         // startdate hiérarchique (pour la facette, cf. svb#381)
         $start && $document['startdate-hierarchy'] = $start->format('Y'); // Que l'année pour le moment
