@@ -239,10 +239,15 @@ class EventEntity extends WorkEntity
                     $terms = $work->getTermsPath($terms, $table);
 
                     if (isset($document["topic-$topic-hierarchy"])) {
-                        $document["topic-$topic-hierarchy"] = array_unique(array_merge(
+                        $document["topic-$topic-hierarchy"] = array_values(array_unique(array_merge(
                             $terms,
                             $document["topic-$topic-hierarchy"]
-                        ));
+                        )));
+                        // remarque : array_values est nécessaire car array_unique conserve les clés.
+                        // si on a un work avec [a] et un event avec [a,b], array_unique(array_merge(work,event))
+                        // nous retourne [0 => a, 2 => b]. Comme les clés ne sont pas uniques, quand on envoie ça
+                        // en JSON à elasticsearch, c'est un objet qui est généré et non pas un tableau et on
+                        // obtient une erreur.
                     } else {
                         $document["topic-$topic-hierarchy"] = $terms;
                     }
