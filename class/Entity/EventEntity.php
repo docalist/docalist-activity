@@ -45,7 +45,7 @@ class EventEntity extends WorkEntity
     /**
      * {@inheritDoc}
      */
-    public static function loadSchema()
+    public static function loadSchema(): array
     {
         return [
             'name' => 'event',

@@ -32,7 +32,7 @@ class TopicField extends BaseTopicField
     /**
      * {@inheritDoc}
      */
-    public static function loadSchema()
+    public static function loadSchema(): array
     {
         return [
             'description' => __("Mots-clés permettant de décrire et de classer l'activité.", 'docalist-activity'),

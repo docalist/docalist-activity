@@ -25,7 +25,7 @@ class ContentField extends BaseContentField
     /**
      * {@inheritDoc}
      */
-    public static function loadSchema()
+    public static function loadSchema(): array
     {
         return [
             'label' => __('Présentation', 'docalist-activity'),

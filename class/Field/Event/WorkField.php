@@ -23,7 +23,7 @@ class WorkField extends Relation
     /**
      * {@inheritDoc}
      */
-    public static function loadSchema()
+    public static function loadSchema(): array
     {
         return [
             'name' => 'work',
