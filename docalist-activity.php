@@ -10,7 +10,7 @@
  * Plugin Name: Docalist Activity
  * Plugin URI:  https://docalist.org/
  * Description: Entités "work" et "event" pour docalist.
- * Version:     2.0.1
+ * Version:     3.0.0
  * Author:      Daniel Ménard
  * Author URI:  https://docalist.org/
  * Text Domain: docalist-activity
@@ -28,7 +28,7 @@ use Docalist\Activity\Installer;
 /**
  * Version du plugin.
  */
-define('DOCALIST_ACTIVITY_VERSION', '2.0.1'); // Garder synchro avec la version indiquée dans l'entête
+define('DOCALIST_ACTIVITY_VERSION', '3.0.0'); // Garder synchro avec la version indiquée dans l'entête
 
 /**
  * Path absolu du répertoire dans lequel le plugin est installé.
