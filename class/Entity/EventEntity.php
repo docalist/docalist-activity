@@ -116,8 +116,10 @@ class EventEntity extends WorkEntity
 
         // Détermine la ou les villes où se déroule l'événement
         $cities = [];
-        foreach ($this->place->filterEntities() as $place) { /** @var PlaceEntity $place */
-            foreach ($place->address->filterValues() as $address) { /** @var PostalAddress $address */
+        /** @var PlaceEntity $place */
+        foreach ($this->place->filterEntities() as $place) {
+            /** @var PostalAddress $address */
+            foreach ($place->address->filterValues() as $address) {
                 $city = $address->locality->getPhpValue();
                 !empty($city) && $cities[$city] = $city; // dédoublonne les villes
             }
